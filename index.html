@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carlitos le vende | Tecnología real</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b1220;
+  --card:rgba(16,24,48,.65);
+  --primary:#1e88ff;
+  --accent:#ffd400;
+  --text:#f5f7fb;
+  --muted:#aab0c0;
+  --glass:rgba(255,255,255,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Inter,sans-serif;
+  color:var(--text);
+  background:#000;
+  overflow-x:hidden;
+}
+
+/* ================= VIDEO DE FONDO ================= */
+.video-bg{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+}
+.video-bg video{
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
+  filter:blur(18px) brightness(.45);
+}
+
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.wrapper{
+  position:relative;
+  z-index:1;
+  max-width:420px;
+  width:100%;
+  margin:0 auto;
+  padding:20px 16px 40px;
+  min-height:100vh;
+}
+
+/* Overlay visual, NO ocupa espacio */
+.wrapper::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,20,40,.55),
+    rgba(10,20,40,.85)
+  );
+  border-radius:22px;
+  z-index:0;
+}
+
+/* ================= TOGGLE ================= */
+.toggle{
+  display:flex;
+  background:#0e1730;
+  border-radius:999px;
+  padding:4px;
+  margin-bottom:18px;
+  position:relative;
+  z-index:2;
+}
+.toggle button{
+  flex:1;
+  background:none;
+  border:none;
+  padding:10px;
+  color:var(--muted);
+  font-weight:600;
+  border-radius:999px;
+  cursor:pointer;
+}
+.toggle button.active{
+  background:var(--primary);
+  color:#fff;
+  font-weight:800;
+}
+
+/* ================= SECCIONES ================= */
+/* 🔑 CLAVE: nada de position:absolute */
+.main-section{
+  display:none;
+  opacity:0;
+  transform:translateY(10px);
+  transition:.35s ease;
+  position:relative;
+  z-index:2;
+}
+.main-section.active{
+  display:block;
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ================= PERFIL ================= */
+.profile{
+  text-align:center;
+  margin-top:10px;
+}
+.avatar{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  margin:auto;
+  background:url("/logo carlitos.png") center/cover no-repeat;
+  border:3px solid var(--accent);
+}
+
+/* ================= LINKS ================= */
+.links{
+  margin-top:24px;
+}
+.link{
+  display:block;
+  text-align:center;
+  padding:14px;
+  background:var(--card);
+  color:var(--text);
+  text-decoration:none;
+  border-radius:14px;
+  margin-bottom:14px;
+  border:1px solid var(--glass);
+  backdrop-filter:blur(8px);
+}
+
+/* ================= CARRUSEL DESTACADOS ================= */
+.carousel{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:6px;
+}
+.carousel::-webkit-scrollbar{
+  display:none;
+}
+.carousel .menu-item{
+  min-width:220px;
+  scroll-snap-align:start;
+}
+
+/* ================= FILTROS ================= */
+input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  margin-bottom:10px;
+}
+.price-filters{
+  display:flex;
+  gap:10px;
+}
+
+/* ================= NAV CATEGORIAS ================= */
+.menu-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin:16px 0;
+}
+.menu-nav button{
+  background:var(--glass);
+  border:none;
+  color:var(--text);
+  padding:8px 14px;
+  border-radius:999px;
+  font-weight:600;
+  cursor:pointer;
+  text-transform:capitalize;
+}
+.menu-nav button.active{
+  background:var(--primary);
+}
+
+/* ================= PRODUCTOS ================= */
+.menu-item{
+  background:var(--card);
+  border-radius:16px;
+  padding:16px;
+  text-align:center;
+  margin-bottom:20px;
+  position:relative;
+  z-index:2;
+}
+.badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--accent);
+  color:#000;
+  font-size:.7rem;
+  font-weight:800;
+  padding:4px 8px;
+  border-radius:999px;
+}
+.menu-item img{
+  width:120px;
+  height:120px;
+  border-radius:14px;
+  object-fit:cover;
+  display:block;
+  margin:0 auto;
+  background:#111;
+}
+
+/* ================= PRECIO Y BOTÓN ================= */
+.price{
+  color:var(--accent);
+  font-size:1.2rem;
+  font-weight:800;
+  margin:10px 0;
+}
+.buy-btn{
+  display:block;
+  background:var(--primary);
+  color:#fff;
+  padding:12px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:700;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  margin-top:30px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div class="video-bg">
+  <video autoplay muted loop>
+    <source src="videofondo.mov">
+  </video>
+</div>
+
+<div class="wrapper">
+
+  <div class="toggle">
+    <button class="active" onclick="showSection('info',this)">Inicio</button>
+    <button onclick="showSection('destacados',this)">Destacados</button>
+    <button onclick="showSection('catalogo',this)">Catálogo</button>
+  </div>
+
+  <section id="info" class="main-section active">
+    <div class="profile">
+      <div class="avatar"></div>
+      <h1>Carlitos le vende</h1>
+      <p>Tecnología confiable, precios reales y atención directa.</p>
+    </div>
+    <div class="links">
+      <a class="link" href="https://wa.me/573218172438">📲 WhatsApp</a>
+      <a class="link" href="#">📸 Instagram</a>
+      <a class="link" href="#">📘 Facebook</a>
+      <a class="link" href="#">🎵 TikTok</a>
+    </div>
+  </section>
+
+  <section id="destacados" class="main-section">
+    <h2 style="margin-bottom:14px">🔥 Productos destacados</h2>
+    <div class="carousel" id="destacadosContent"></div>
+  </section>
+
+  <section id="catalogo" class="main-section">
+    <input id="searchInput" placeholder="Buscar producto...">
+    <div class="price-filters">
+      <input type="number" id="minPrice" placeholder="Precio mínimo">
+      <input type="number" id="maxPrice" placeholder="Precio máximo">
+    </div>
+    <div class="menu-nav" id="menuNav"></div>
+    <div id="menuContent"></div>
+  </section>
+
+  <footer>Carlitos le vende ©</footer>
+
+</div>
+
+<script>
+const WHATSAPP = "573218172438";
+let data = {}, currentCategory = "";
+
+function showSection(id, btn) {
+  document.querySelectorAll(".main-section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".toggle button").forEach(b => b.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+fetch("https://script.google.com/macros/s/AKfycbw9abqRwlPx2-_whKGdsT53pDqEaJryhx2FxE6DSUpTFUg8lDQr_3zGFE-mkIXRPhqD/exec")
+  .then(r => r.json())
+  .then(json => {
+    Object.keys(json).forEach(cat => {
+      data[cat] = json[cat].filter(p => p.activo === true || p.activo === "TRUE");
+    });
+    renderNav();
+    renderDestacados();
+  });
+
+function renderNav() {
+  menuNav.innerHTML = "";
+  Object.keys(data).forEach((cat, i) => {
+    const b = document.createElement("button");
+    b.textContent = cat;
+    if (i === 0) {
+      b.classList.add("active");
+      currentCategory = cat;
+      applyFilters();
+    }
+    b.onclick = () => {
+      document.querySelectorAll(".menu-nav button").forEach(x => x.classList.remove("active"));
+      b.classList.add("active");
+      currentCategory = cat;
+      applyFilters();
+    };
+    menuNav.appendChild(b);
+  });
+}
+
+function applyFilters() {
+  const q = searchInput.value.toLowerCase();
+  const min = +minPrice.value || 0;
+  const max = +maxPrice.value || Infinity;
+
+  const items = data[currentCategory].filter(p => {
+    const price = +p.precio;
+    return (
+      price >= min &&
+      price <= max &&
+      (
+        p.nombre.toLowerCase().includes(q) ||
+        (p.descripcion || "").toLowerCase().includes(q)
+      )
+    );
+  });
+
+  renderItems(items);
+}
+
+function renderItems(items) {
+  menuContent.innerHTML = items.length
+    ? ""
+    : "<p style='text-align:center;color:#aaa'>Sin resultados</p>";
+
+  items.forEach(p => {
+    menuContent.innerHTML += productCard(p);
+  });
+}
+
+function renderDestacados() {
+  destacadosContent.innerHTML = "";
+  Object.values(data)
+    .flat()
+    .filter(p => p.destacado === true || p.destacado === "TRUE")
+    .forEach(p => {
+      destacadosContent.innerHTML += productCard(p, true);
+    });
+}
+
+function productCard(p, d = false) {
+  const imgSrc = p.imagen ? `./${p.imagen}` : "./default.jpg";
+  const msg = encodeURIComponent(`Hola, me interesa ${p.nombre} por $${p.precio}`);
+
+  return `
+    <div class="menu-item">
+      ${d ? `<div class="badge">DESTACADO</div>` : ""}
+      <img src="${imgSrc}" alt="${p.nombre}">
+      <strong>${p.nombre}</strong>
+      <div class="price">$ ${p.precio}</div>
+      <a class="buy-btn" href="https://wa.me/${WHATSAPP}?text=${msg}">Comprar</a>
+    </div>
+  `;
+}
+
+searchInput.oninput = applyFilters;
+minPrice.oninput = applyFilters;
+maxPrice.oninput = applyFilters;
+</script>
+
+</body>
+</html>
