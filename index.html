@@ -404,7 +404,8 @@
 
     <script>
         const WHATSAPP = "573218172438";
-        let data = {}, currentCategory = "";
+        let data = {};
+        let currentCategory = null;
 
         function showSection(id, btn) {
             document.querySelectorAll(".main-section").forEach(s => s.classList.remove("active"));
@@ -417,46 +418,88 @@
         fetch("https://script.google.com/macros/s/AKfycbw9abqRwlPx2-_whKGdsT53pDqEaJryhx2FxE6DSUpTFUg8lDQr_3zGFE-mkIXRPhqD/exec")
             .then(r => r.json())
             .then(json => {
-                data = json;
+                Object.keys(json).forEach(cat => {
+                    data[cat] = json[cat].filter(p =>
+                        p.activo === true || p.activo === "TRUE"
+                    );
+                });
+
                 renderNav();
-            });
+            })
+            .catch(err => console.error("Sheets error:", err));
 
         function renderNav() {
             menuNav.innerHTML = "";
-            Object.keys(data).forEach((cat, i) => {
+
+            const categories = Object.keys(data);
+            if (!categories.length) return;
+
+            currentCategory = categories[0];
+
+            categories.forEach((cat, i) => {
                 const b = document.createElement("button");
                 b.textContent = cat;
-                if (i === 0) { b.classList.add("active"); currentCategory = cat; applyFilters(); }
+                if (i === 0) b.classList.add("active");
+
                 b.onclick = () => {
                     document.querySelectorAll(".menu-nav button").forEach(x => x.classList.remove("active"));
                     b.classList.add("active");
                     currentCategory = cat;
+                    searchInput.value = "";
                     applyFilters();
                 };
+
                 menuNav.appendChild(b);
             });
+
+            applyFilters();
         }
 
         function applyFilters() {
-            const q = searchInput.value.toLowerCase();
+            const q = searchInput.value.toLowerCase().trim();
             const min = +minPrice.value || 0;
             const max = +maxPrice.value || Infinity;
 
-            menuContent.innerHTML = "";
-            data[currentCategory]
-                .filter(p => p.activo === true || p.activo === "TRUE")
-                .filter(p => p.precio >= min && p.precio <= max)
-                .filter(p => p.nombre.toLowerCase().includes(q))
-                .forEach(p => menuContent.innerHTML += productCard(p));
+            let items = [];
+
+            if (q !== "") {
+                items = Object.values(data)
+                    .flat()
+                    .filter(p =>
+                        p.precio >= min &&
+                        p.precio <= max &&
+                        (
+                            p.nombre.toLowerCase().includes(q) ||
+                            (p.descripcion || "").toLowerCase().includes(q)
+                        )
+                    );
+            } else {
+                if (!currentCategory || !data[currentCategory]) return;
+                items = data[currentCategory].filter(p =>
+                    p.precio >= min && p.precio <= max
+                );
+            }
+
+            renderItems(items);
+        }
+
+        function renderItems(items) {
+            menuContent.innerHTML = items.length
+                ? ""
+                : "<p style='text-align:center;color:#aaa'>Sin resultados</p>";
+
+            items.forEach(p => {
+                menuContent.innerHTML += productCard(p);
+            });
         }
 
         function productCard(p) {
             return `
-      <div class="menu-item" onclick='openProduct(${JSON.stringify(p)})'>
-        <img src="./${p.imagen || 'default.jpg'}">
-        <div class="product-title">${p.nombre}</div>
-        <div class="price">$ ${Number(p.precio).toLocaleString()}</div>
-      </div>`;
+  <div class="menu-item" onclick='openProduct(${JSON.stringify(p)})'>
+    <img src="./${p.imagen || "default.jpg"}">
+    <div class="product-title">${p.nombre}</div>
+    <div class="price">$ ${Number(p.precio).toLocaleString()}</div>
+  </div>`;
         }
 
         function openProduct(p) {
@@ -476,10 +519,11 @@
             document.body.style.overflow = "auto";
         }
 
-        searchInput.oninput = applyFilters;
-        minPrice.oninput = applyFilters;
-        maxPrice.oninput = applyFilters;
+        searchInput.addEventListener("input", applyFilters);
+        minPrice.addEventListener("input", applyFilters);
+        maxPrice.addEventListener("input", applyFilters);
     </script>
+
 
 </body>
 
