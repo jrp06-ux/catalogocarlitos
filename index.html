@@ -67,8 +67,9 @@ body{
     rgba(10,20,40,.85)
   );
   border-radius:22px;
-  z-index:0;
+  z-index:1;
 }
+
 
 /* ================= TOGGLE ================= */
 .toggle{
@@ -122,11 +123,16 @@ body{
   height:110px;
   border-radius:50%;
   margin:auto;
-  background-image: url("./logocarlitos.png");
+
+  background-image: url("./logo.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
   border:3px solid var(--accent);
+
+  position: relative;
+  z-index: 2;
 }
 
 
@@ -410,6 +416,7 @@ maxPrice.oninput = applyFilters;
 
 </body>
 </html>
+
 
 
 
