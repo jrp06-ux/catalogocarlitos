@@ -1,538 +1,516 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Carlitos le vende | Tecnología real</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Carlitos le vende | Tecnología real</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+<style>
+:root {
+--bg:#0a0f1e;
+--card:rgba(18,26,55,.78);
+--primary:#1e88ff;
+--accent:#ffd400;
+--text:#f5f7fb;
+--muted:#aab0c0;
+--glass:rgba(255,255,255,.08);
+}
 
-    <style>
-        :root {
-            --bg: #0a0f1e;
-            --card: rgba(18, 26, 55, .78);
-            --primary: #1e88ff;
-            --accent: #ffd400;
-            --text: #f5f7fb;
-            --muted: #aab0c0;
-            --glass: rgba(255, 255, 255, .08);
-        }
+*{margin:0;padding:0;box-sizing:border-box}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+body{
+font-family:'Nunito',sans-serif;
+background:#000;
+color:var(--text);
+overflow-x:hidden;
+}
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: #000;
-            color: var(--text);
-            overflow-x: hidden;
-        }
+.video-bg{position:fixed;inset:0;z-index:-10;overflow:hidden}
+.video-bg video{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:blur(14px) brightness(.55);
+}
 
-        .video-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -10;
-            overflow: hidden;
-        }
+.wrapper{
+max-width:420px;
+margin:0 auto;
+padding:20px 16px 90px;
+min-height:100vh;
+position:relative;
+}
 
-        .video-bg video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: blur(14px) brightness(.55);
-        }
+.wrapper::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(10,15,35,.55),rgba(10,15,35,.95));
+border-radius:26px;
+z-index:-1;
+}
 
-        .wrapper {
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 20px 16px 70px;
-            min-height: 100vh;
-            position: relative;
-        }
+/* HERO */
 
-        .wrapper::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom,
-                    rgba(10, 15, 35, .55),
-                    rgba(10, 15, 35, .95));
-            border-radius: 26px;
-            z-index: -1;
-        }
+.hero{text-align:center;margin-bottom:22px}
+.hero-logo{
+width:120px;height:120px;margin:0 auto 14px;
+border-radius:50%;
+background:url("./logo.png") center/cover no-repeat;
+border:3px solid var(--accent);
+animation:fadeIn .6s ease;
+}
 
-        .hero {
-            text-align: center;
-            margin-bottom: 22px;
-        }
+.hero-title{
+font-family:'Playfair Display',serif;
+font-size:1.6rem;
+animation:fadeUp .6s ease;
+}
 
-        .hero-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 14px;
-            border-radius: 50%;
-            background: url("./logo.png") center/cover no-repeat;
-            border: 3px solid var(--accent);
-        }
+.hero-tagline{color:var(--muted);margin-top:6px}
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-        }
+/* SOCIAL */
 
-        .hero-tagline {
-            color: var(--muted);
-            margin-top: 6px;
-        }
+.socials{
+display:flex;
+justify-content:center;
+gap:18px;
+margin:18px 0 26px;
+}
 
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            margin: 18px 0 26px;
-        }
+.social-btn{
+width:48px;height:48px;
+display:flex;align-items:center;justify-content:center;
+border-radius:50%;
+background:var(--card);
+color:#fff;
+font-size:1.25rem;
+text-decoration:none;
+border:1px solid var(--glass);
+transition:.2s ease;
+}
 
-        .social-btn {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--card);
-            color: #fff;
-            font-size: 1.25rem;
-            text-decoration: none;
-            border: 1px solid var(--glass);
-            transition: .2s ease;
-        }
+.social-btn:hover{
+transform:translateY(-3px) scale(1.07);
+background:rgba(30,136,255,.25);
+}
 
-        .social-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            background: rgba(30, 136, 255, .2);
-        }
+/* SECTIONS */
 
+.main-section{
+opacity:0;
+transform:translateY(15px);
+pointer-events:none;
+transition:.35s ease;
+}
 
-        .toggle {
-            display: flex;
-            background: #0e1730;
-            border-radius: 999px;
-            padding: 4px;
-            margin-bottom: 18px;
-        }
+.main-section.active{
+opacity:1;
+transform:none;
+pointer-events:auto;
+}
 
-        .toggle button {
-            flex: 1;
-            background: none;
-            border: none;
-            padding: 10px;
-            color: var(--muted);
-            font-weight: 700;
-            cursor: pointer;
-        }
+/* LOCATIONS */
 
-        .toggle button.active {
-            background: var(--primary);
-            color: #fff;
-        }
+.locations{margin-top:30px}
+.locations h3{
+font-family:'Playfair Display',serif;
+text-align:center;
+margin-bottom:16px;
+}
 
-        .main-section {
-            display: none;
-        }
+.location-card{
+background:var(--card);
+border-radius:16px;
+padding:10px;
+margin-bottom:14px;
+border:1px solid var(--glass);
+}
 
-        .main-section.active {
-            display: block;
-        }
+.location-card iframe{
+width:100%;
+height:160px;
+border:none;
+border-radius:12px;
+}
 
-        .locations {
-            margin-top: 30px;
-        }
+/* CATALOG */
 
-        .locations h3 {
-            font-family: 'Playfair Display', serif;
-            text-align: center;
-            margin-bottom: 16px;
-        }
+input{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:none;
+background:#0e1730;
+color:#fff;
+margin-bottom:10px;
+}
 
-        .location-card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 10px;
-            margin-bottom: 14px;
-            border: 1px solid var(--glass);
-        }
+.price-filters{display:flex;gap:10px}
 
-        .location-card strong {
-            display: block;
-            margin-bottom: 8px;
-        }
+.menu-nav{
+display:flex;
+gap:8px;
+overflow-x:auto;
+margin:14px 0;
+}
 
-        .location-card iframe {
-            width: 100%;
-            height: 160px;
-            border: none;
-            border-radius: 12px;
-        }
+.menu-nav button{
+background:var(--glass);
+border:none;
+color:#fff;
+padding:8px 14px;
+border-radius:999px;
+font-weight:700;
+cursor:pointer;
+transition:.2s ease;
+}
 
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            background: #0e1730;
-            color: #fff;
-            margin-bottom: 10px;
-        }
+.menu-nav button.active{background:var(--primary)}
 
-        .price-filters {
-            display: flex;
-            gap: 10px;
-        }
+.menu-item{
+background:var(--card);
+border-radius:20px;
+padding:16px;
+margin-bottom:20px;
+border:1px solid var(--glass);
+cursor:pointer;
+transition:.2s ease;
+animation:fadeUp .4s ease;
+}
 
-        .menu-nav {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            margin: 14px 0;
-        }
+.menu-item:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 25px rgba(0,0,0,.35);
+}
 
-        .menu-nav button {
-            background: var(--glass);
-            border: none;
-            color: #fff;
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+.menu-item img{
+width:100%;
+aspect-ratio:4/5;
+object-fit:contain;
+border-radius:16px;
+background:#0b1220;
+margin-bottom:12px;
+}
 
-        .menu-nav button.active {
-            background: var(--primary);
-        }
+.product-title{
+font-family:'Playfair Display',serif;
+font-size:1.1rem;
+}
 
-        .menu-item {
-            background: var(--card);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 20px;
-            border: 1px solid var(--glass);
-            cursor: pointer;
-        }
-        .menu-item img {
-            width: 100%;
-            aspect-ratio: 4 / 5;
-            object-fit: contain;    
-            border-radius: 16px;
-            background: #0b1220;
-            margin-bottom: 12px;
-        }
+.price{
+color:var(--accent);
+font-weight:800;
+font-size:1.2rem;
+margin-top:6px;
+}
 
-        .product-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-        }
+/* MODAL */
 
-        .price {
-            color: var(--accent);
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-top: 6px;
-        }
+.product-modal{
+position:fixed;
+inset:0;
+background:rgba(5,8,20,.92);
+backdrop-filter:blur(10px);
+z-index:5000;
+display:flex;
+flex-direction:column;
+padding:20px;
+opacity:0;
+pointer-events:none;
+transition:.3s ease;
+}
 
-        .product-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(5, 8, 20, .92);
-            backdrop-filter: blur(10px);
-            z-index: 5000;
-            display: none;
-            flex-direction: column;
-            padding: 20px;
-        }
+.product-modal.active{
+opacity:1;
+pointer-events:auto;
+}
 
-        .product-modal.active {
-            display: flex;
-        }
+.modal-close{
+align-self:flex-end;
+font-size:1.8rem;
+cursor:pointer;
+}
 
-        .modal-close {
-            align-self: flex-end;
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
+.modal-img{
+width:100%;
+aspect-ratio:1/1;
+object-fit:contain;
+border-radius:20px;
+background:#0b1220;
+}
 
-        .modal-img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: contain;
-            border-radius: 20px;
-            background: #0b1220;
-        }
+.modal-content{margin-top:16px}
 
-        .modal-content {
-            margin-top: 16px;
-        }
+.modal-title{
+font-family:'Playfair Display',serif;
+font-size:1.6rem;
+}
 
-        .modal-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-        }
+.modal-price{
+color:var(--accent);
+font-size:1.4rem;
+font-weight:800;
+margin:8px 0;
+}
 
-        .modal-price {
-            color: var(--accent);
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin: 8px 0;
-        }
+.modal-desc{
+color:var(--muted);
+line-height:1.6;
+margin-bottom:18px;
+}
 
-        .modal-desc {
-            color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 18px;
-        }
+.buy-btn{
+display:block;
+background:var(--primary);
+padding:14px;
+border-radius:14px;
+text-align:center;
+color:#fff;
+text-decoration:none;
+font-weight:800;
+transition:.2s ease;
+}
 
-        .buy-btn {
-            display: block;
-            background: var(--primary);
-            padding: 14px;
-            border-radius: 14px;
-            text-align: center;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 800;
-        }
+.buy-btn:hover{transform:scale(1.03)}
 
-        footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: .8rem;
-            margin-top: 30px;
-        }
-    </style>
+/* NAV BAR */
+
+.bottom-nav{
+position:fixed;
+bottom:0;left:0;right:0;
+height:64px;
+background:rgba(10,15,35,.95);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:1000;
+border-top:1px solid var(--glass);
+}
+
+.nav-btn{
+color:var(--muted);
+background:none;
+border:none;
+font-size:1.4rem;
+display:flex;
+flex-direction:column;
+align-items:center;
+cursor:pointer;
+transition:.2s;
+}
+
+.nav-btn.active{color:var(--primary)}
+
+footer{
+text-align:center;
+color:var(--muted);
+font-size:.8rem;
+margin-top:30px;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:none}
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+</style>
 </head>
 
 <body>
 
-    <div class="video-bg">
-        <video autoplay muted loop playsinline webkit-playsinline preload="auto">
-            <source src="videofondo.mp4" type="video/mp4">
-        </video>
-    </div>
+<div class="video-bg">
+<video autoplay muted loop playsinline preload="auto">
+<source src="videofondo.mp4" type="video/mp4">
+</video>
+</div>
 
-    <div class="wrapper">
+<div class="wrapper">
 
-        <div class="hero">
-            <div class="hero-logo"></div>
-            <h1 class="hero-title">Carlitos le vende</h1>
-            <p class="hero-tagline">Tecnología real, sin cuentos raros</p>
-        </div>
+<div class="hero">
+<div class="hero-logo"></div>
+<h1 class="hero-title">Carlitos le vende</h1>
+<p class="hero-tagline">Tecnología real, sin cuentos raros</p>
+</div>
 
-        <div class="socials">
-            <a href="https://wa.me/573218172438" class="social-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-            <a href="https://www.instagram.com/carlitoslevende/" class="social-btn" target="_blank">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=100045449417873" 
-               class="social-btn" 
-               target="_blank" 
-               aria-label="Facebook">
-               <i class="fa-brands fa-facebook-f"></i>
-            </a>
+<div class="socials">
+<a href="https://wa.me/573218172438" class="social-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://www.instagram.com/carlitoslevende/" class="social-btn" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+<a href="https://www.facebook.com/profile.php?id=100045449417873" class="social-btn" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="https://www.tiktok.com/@carlitoslevende_" class="social-btn" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+</div>
 
-            <a href="https://www.tiktok.com/@carlitoslevende_" class="social-btn" target="_blank">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-        </div>
+<section id="info" class="main-section active">
+<div class="locations">
+<h3>Nuestra ubicación</h3>
+<div class="location-card">
+<strong>📍 Pereira</strong>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy"></iframe>
+</div>
+</div>
+</section>
 
+<section id="catalogo" class="main-section">
+<input id="searchInput" placeholder="Buscar producto">
+<div class="price-filters">
+<input type="number" id="minPrice" placeholder="Precio mín">
+<input type="number" id="maxPrice" placeholder="Precio máx">
+</div>
+<div class="menu-nav" id="menuNav"></div>
+<div id="menuContent"><p style="text-align:center;color:#aaa">Cargando productos...</p></div>
+</section>
 
-        <div class="toggle">
-            <button class="active" onclick="showSection('info', this)">Inicio</button>
-            <button onclick="showSection('catalogo', this)">Catálogo</button>
-        </div>
+<footer>Carlitos le vende ©</footer>
+</div>
 
-        <section id="info" class="main-section active">
+<div class="bottom-nav">
+<button class="nav-btn active" onclick="showSection('info',this)">
+<i class="fa-solid fa-house"></i>
+</button>
+<button class="nav-btn" onclick="showSection('catalogo',this)">
+<i class="fa-solid fa-store"></i>
+</button>
+</div>
 
-            <div class="locations">
-                <h3>Nuestra ubicación</h3>
-            
-                <div class="location-card">
-                    <strong>📍 Pereira</strong>
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.738814354576!2d-75.69781652025675!3d4.814847928201841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38870047ff432d%3A0x462b7d5fbd303853!2sCarlitos%20Le%20Vende!5e0!3m2!1ses-419!2sus!4v1769372642814!5m2!1ses-419!2sus"
-                        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
-                    </iframe>
-                </div>
+<div class="product-modal" id="productModal">
+<div class="modal-close" onclick="closeProduct()">✕</div>
+<img id="modalImg" class="modal-img">
+<div class="modal-content">
+<div id="modalTitle" class="modal-title"></div>
+<div id="modalPrice" class="modal-price"></div>
+<div id="modalDesc" class="modal-desc"></div>
+<a id="modalBuy" class="buy-btn" target="_blank">Comprar por WhatsApp</a>
+</div>
+</div>
 
-            </div>
+<script>
+const WHATSAPP="573218172438";
+let data={};
+let currentCategory=null;
 
-        </section>
+function showSection(id,btn){
+document.querySelectorAll(".main-section").forEach(s=>s.classList.remove("active"));
+document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+btn.classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
 
-        <section id="catalogo" class="main-section">
-            <input id="searchInput" placeholder="Buscar producto">
-            <div class="price-filters">
-                <input type="number" id="minPrice" placeholder="Precio mín">
-                <input type="number" id="maxPrice" placeholder="Precio máx">
-            </div>
-            <div class="menu-nav" id="menuNav"></div>
-            <div id="menuContent"></div>
-        </section>
+fetch("https://script.google.com/macros/s/AKfycbx4nd_AUrout4BxfW-hX6V9_BG5iylbspGFbfz_wFvymzDiGSEN5JoLE9-YzLm04h2l/exec")
+.then(r=>r.json())
+.then(json=>{
+Object.keys(json).forEach(cat=>{
+data[cat]=json[cat].filter(p=>p.activo===true||p.activo==="TRUE");
+});
+renderNav();
+})
+.catch(()=>{
+menuContent.innerHTML="<p style='text-align:center;color:#f66'>Error cargando productos</p>";
+});
 
-        <footer>Carlitos le vende ©</footer>
-    </div>
+function renderNav(){
+menuNav.innerHTML="";
+const categories=Object.keys(data);
+if(!categories.length)return;
 
-    <div class="product-modal" id="productModal">
-        <div class="modal-close" onclick="closeProduct()">✕</div>
-        <img id="modalImg" class="modal-img">
-        <div class="modal-content">
-            <div id="modalTitle" class="modal-title"></div>
-            <div id="modalPrice" class="modal-price"></div>
-            <div id="modalDesc" class="modal-desc"></div>
-            <a id="modalBuy" class="buy-btn" target="_blank">Comprar por WhatsApp</a>
-        </div>
-    </div>
+currentCategory=categories[0];
 
-    <script>
-        const WHATSAPP = "573218172438";
-        let data = {};
-        let currentCategory = null;
+categories.forEach((cat,i)=>{
+const b=document.createElement("button");
+b.textContent=cat;
+if(i===0)b.classList.add("active");
 
-        function showSection(id, btn) {
-            document.querySelectorAll(".main-section").forEach(s => s.classList.remove("active"));
-            document.querySelectorAll(".toggle button").forEach(b => b.classList.remove("active"));
-            document.getElementById(id).classList.add("active");
-            btn.classList.add("active");
-            window.scrollTo({ top: 0 });
-        }
+b.onclick=()=>{
+document.querySelectorAll(".menu-nav button").forEach(x=>x.classList.remove("active"));
+b.classList.add("active");
+currentCategory=cat;
+searchInput.value="";
+applyFilters();
+};
 
-        fetch("https://script.google.com/macros/s/AKfycbx4nd_AUrout4BxfW-hX6V9_BG5iylbspGFbfz_wFvymzDiGSEN5JoLE9-YzLm04h2l/exec")
-            .then(r => r.json())
-            .then(json => {
-                Object.keys(json).forEach(cat => {
-                    data[cat] = json[cat].filter(p =>
-                        p.activo === true || p.activo === "TRUE"
-                    );
-                });
+menuNav.appendChild(b);
+});
 
-                renderNav();
-            })
-            .catch(err => console.error("Sheets error:", err));
+applyFilters();
+}
 
-        function renderNav() {
-            menuNav.innerHTML = "";
+function applyFilters(){
+const q=searchInput.value.toLowerCase().trim();
+const min=+minPrice.value||0;
+const max=+maxPrice.value||Infinity;
 
-            const categories = Object.keys(data);
-            if (!categories.length) return;
+let items=[];
 
-            currentCategory = categories[0];
+if(q!==""){
+items=Object.values(data).flat().filter(p=>
+p.precio>=min&&p.precio<=max&&
+(p.nombre.toLowerCase().includes(q)||
+(p.descripcion||"").toLowerCase().includes(q))
+);
+}else{
+if(!currentCategory||!data[currentCategory])return;
+items=data[currentCategory].filter(p=>p.precio>=min&&p.precio<=max);
+}
 
-            categories.forEach((cat, i) => {
-                const b = document.createElement("button");
-                b.textContent = cat;
-                if (i === 0) b.classList.add("active");
+renderItems(items);
+}
 
-                b.onclick = () => {
-                    document.querySelectorAll(".menu-nav button").forEach(x => x.classList.remove("active"));
-                    b.classList.add("active");
-                    currentCategory = cat;
-                    searchInput.value = "";
-                    applyFilters();
-                };
+function renderItems(items){
+menuContent.innerHTML="";
+if(!items.length){
+menuContent.innerHTML="<p style='text-align:center;color:#aaa'>Sin resultados</p>";
+return;
+}
 
-                menuNav.appendChild(b);
-            });
+const frag=document.createDocumentFragment();
 
-            applyFilters();
-        }
+items.forEach(p=>{
+const div=document.createElement("div");
+div.innerHTML=productCard(p);
+frag.appendChild(div.firstElementChild);
+});
 
-        function applyFilters() {
-            const q = searchInput.value.toLowerCase().trim();
-            const min = +minPrice.value || 0;
-            const max = +maxPrice.value || Infinity;
+menuContent.appendChild(frag);
+}
 
-            let items = [];
+function productCard(p){
+return `
+<div class="menu-item" onclick='openProduct(${JSON.stringify(p)})'>
+<img src="./${p.imagen||"default.jpg"}">
+<div class="product-title">${p.nombre}</div>
+<div class="price">$ ${Number(p.precio).toLocaleString()}</div>
+</div>`;
+}
 
-            if (q !== "") {
-                items = Object.values(data)
-                    .flat()
-                    .filter(p =>
-                        p.precio >= min &&
-                        p.precio <= max &&
-                        (
-                            p.nombre.toLowerCase().includes(q) ||
-                            (p.descripcion || "").toLowerCase().includes(q)
-                        )
-                    );
-            } else {
-                if (!currentCategory || !data[currentCategory]) return;
-                items = data[currentCategory].filter(p =>
-                    p.precio >= min && p.precio <= max
-                );
-            }
+function openProduct(p){
+modalImg.src="./"+(p.imagen||"default.jpg");
+modalTitle.textContent=p.nombre;
+modalPrice.textContent="$ "+Number(p.precio).toLocaleString();
+modalDesc.textContent=p.descripcion||"Producto con garantía y soporte.";
+modalBuy.href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Hola, me interesa ${p.nombre} por $${p.precio}`)}`;
+productModal.classList.add("active");
+document.body.style.overflow="hidden";
+}
 
-            renderItems(items);
-        }
+function closeProduct(){
+productModal.classList.remove("active");
+document.body.style.overflow="auto";
+}
 
-        function renderItems(items) {
-            menuContent.innerHTML = items.length
-                ? ""
-                : "<p style='text-align:center;color:#aaa'>Sin resultados</p>";
-
-            items.forEach(p => {
-                menuContent.innerHTML += productCard(p);
-            });
-        }
-
-        function productCard(p) {
-            return `
-  <div class="menu-item" onclick='openProduct(${JSON.stringify(p)})'>
-    <img src="./${p.imagen || "default.jpg"}">
-    <div class="product-title">${p.nombre}</div>
-    <div class="price">$ ${Number(p.precio).toLocaleString()}</div>
-  </div>`;
-        }
-
-        function openProduct(p) {
-            modalImg.src = "./" + (p.imagen || "default.jpg");
-            modalTitle.textContent = p.nombre;
-            modalPrice.textContent = "$ " + Number(p.precio).toLocaleString();
-            modalDesc.textContent = p.descripcion || "Producto con garantía y soporte.";
-            modalBuy.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                `Hola, me interesa ${p.nombre} por $${p.precio}`
-            )}`;
-            productModal.classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeProduct() {
-            productModal.classList.remove("active");
-            document.body.style.overflow = "auto";
-        }
-
-        searchInput.addEventListener("input", applyFilters);
-        minPrice.addEventListener("input", applyFilters);
-        maxPrice.addEventListener("input", applyFilters);
-    </script>
-
+searchInput.addEventListener("input",applyFilters);
+minPrice.addEventListener("input",applyFilters);
+maxPrice.addEventListener("input",applyFilters);
+</script>
 
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
