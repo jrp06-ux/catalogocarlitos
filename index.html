@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-:root {
+:root{
 --bg:#0a0f1e;
---card:rgba(18,26,55,.78);
+--card:rgba(28,38,75,.88);
 --primary:#1e88ff;
 --accent:#ffd400;
 --text:#f5f7fb;
@@ -33,14 +33,18 @@ overflow-x:hidden;
 width:100%;
 height:100%;
 object-fit:cover;
-filter:blur(14px) brightness(.55);
+filter:blur(8px) brightness(.55);
+}
+
+@media (prefers-reduced-motion: reduce){
+.video-bg{display:none}
+body{background:#0a0f1e}
 }
 
 .wrapper{
 max-width:420px;
 margin:0 auto;
 padding:20px 16px 90px;
-min-height:100vh;
 position:relative;
 }
 
@@ -48,42 +52,53 @@ position:relative;
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to bottom,rgba(10,15,35,.55),rgba(10,15,35,.95));
+background:linear-gradient(
+to bottom,
+rgba(10,15,35,.55),
+rgba(10,15,35,.95)
+);
 border-radius:26px;
 z-index:-1;
 }
 
-/* HERO */
+.hero{
+text-align:center;
+margin-bottom:10px;
+}
 
-.hero{text-align:center;margin-bottom:22px}
 .hero-logo{
-width:120px;height:120px;margin:0 auto 14px;
+width:120px;
+height:120px;
+margin:0 auto 10px;
 border-radius:50%;
 background:url("./logo.png") center/cover no-repeat;
 border:3px solid var(--accent);
-animation:fadeIn .6s ease;
 }
 
 .hero-title{
 font-family:'Playfair Display',serif;
 font-size:1.6rem;
-animation:fadeUp .6s ease;
 }
 
-.hero-tagline{color:var(--muted);margin-top:6px}
-
-/* SOCIAL */
+.hero-tagline{
+color:var(--muted);
+margin-top:6px;
+line-height:1.4;
+}
 
 .socials{
 display:flex;
 justify-content:center;
 gap:18px;
-margin:18px 0 26px;
+margin:10px 0 14px;
 }
 
 .social-btn{
-width:48px;height:48px;
-display:flex;align-items:center;justify-content:center;
+width:48px;
+height:48px;
+display:flex;
+align-items:center;
+justify-content:center;
 border-radius:50%;
 background:var(--card);
 color:#fff;
@@ -98,46 +113,44 @@ transform:translateY(-3px) scale(1.07);
 background:rgba(30,136,255,.25);
 }
 
-/* SECTIONS */
-
 .main-section{
-opacity:0;
-transform:translateY(15px);
-pointer-events:none;
-transition:.35s ease;
+  display:none;
+  opacity:0;
+  transform:translateY(15px);
+  pointer-events:none;
+  transition:.35s ease;
 }
 
 .main-section.active{
-opacity:1;
-transform:none;
-pointer-events:auto;
+  display:block;
+  opacity:1;
+  transform:none;
+  pointer-events:auto;
 }
 
-/* LOCATIONS */
 
-.locations{margin-top:30px}
+.locations{margin-top:20px}
+
 .locations h3{
 font-family:'Playfair Display',serif;
 text-align:center;
-margin-bottom:16px;
+margin-bottom:12px;
 }
 
 .location-card{
 background:var(--card);
 border-radius:16px;
-padding:10px;
+padding:12px;
 margin-bottom:14px;
 border:1px solid var(--glass);
 }
 
 .location-card iframe{
 width:100%;
-height:160px;
+height:200px;
 border:none;
 border-radius:12px;
 }
-
-/* CATALOG */
 
 input{
 width:100%;
@@ -149,13 +162,16 @@ color:#fff;
 margin-bottom:10px;
 }
 
-.price-filters{display:flex;gap:10px}
+.price-filters{
+display:flex;
+gap:10px;
+}
 
 .menu-nav{
 display:flex;
 gap:8px;
 overflow-x:auto;
-margin:14px 0;
+margin:12px 0;
 }
 
 .menu-nav button{
@@ -169,7 +185,9 @@ cursor:pointer;
 transition:.2s ease;
 }
 
-.menu-nav button.active{background:var(--primary)}
+.menu-nav button.active{
+background:var(--primary);
+}
 
 .menu-item{
 background:var(--card);
@@ -179,7 +197,6 @@ margin-bottom:20px;
 border:1px solid var(--glass);
 cursor:pointer;
 transition:.2s ease;
-animation:fadeUp .4s ease;
 }
 
 .menu-item:hover{
@@ -190,7 +207,7 @@ box-shadow:0 12px 25px rgba(0,0,0,.35);
 .menu-item img{
 width:100%;
 aspect-ratio:4/5;
-object-fit:contain;
+object-fit:cover;
 border-radius:16px;
 background:#0b1220;
 margin-bottom:12px;
@@ -207,8 +224,6 @@ font-weight:800;
 font-size:1.2rem;
 margin-top:6px;
 }
-
-/* MODAL */
 
 .product-modal{
 position:fixed;
@@ -238,12 +253,14 @@ cursor:pointer;
 .modal-img{
 width:100%;
 aspect-ratio:1/1;
-object-fit:contain;
+object-fit:cover;
 border-radius:20px;
 background:#0b1220;
 }
 
-.modal-content{margin-top:16px}
+.modal-content{
+margin-top:16px;
+}
 
 .modal-title{
 font-family:'Playfair Display',serif;
@@ -275,13 +292,15 @@ font-weight:800;
 transition:.2s ease;
 }
 
-.buy-btn:hover{transform:scale(1.03)}
-
-/* NAV BAR */
+.buy-btn:hover{
+transform:scale(1.03);
+}
 
 .bottom-nav{
 position:fixed;
-bottom:0;left:0;right:0;
+bottom:0;
+left:0;
+right:0;
 height:64px;
 background:rgba(10,15,35,.95);
 backdrop-filter:blur(10px);
@@ -296,7 +315,7 @@ border-top:1px solid var(--glass);
 color:var(--muted);
 background:none;
 border:none;
-font-size:1.4rem;
+font-size:1.2rem;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -304,27 +323,23 @@ cursor:pointer;
 transition:.2s;
 }
 
-.nav-btn.active{color:var(--primary)}
+.nav-btn span{
+font-size:.65rem;
+margin-top:2px;
+}
+
+.nav-btn.active{
+color:var(--primary);
+}
 
 footer{
 text-align:center;
 color:var(--muted);
 font-size:.8rem;
-margin-top:30px;
-}
-
-/* ANIMATIONS */
-
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(15px)}
-to{opacity:1;transform:none}
-}
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
+margin-top:20px;
 }
 </style>
+
 </head>
 
 <body>
@@ -344,10 +359,10 @@ to{opacity:1}
 </div>
 
 <div class="socials">
-<a href="https://wa.me/573218172438" class="social-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-<a href="https://www.instagram.com/carlitoslevende/" class="social-btn" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-<a href="https://www.facebook.com/profile.php?id=100045449417873" class="social-btn" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-<a href="https://www.tiktok.com/@carlitoslevende_" class="social-btn" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+<a href="https://wa.me/573218172438" class="social-btn" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://www.instagram.com/carlitoslevende/" class="social-btn" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+<a href="https://www.facebook.com/profile.php?id=100045449417873" class="social-btn" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="https://www.tiktok.com/@carlitoslevende_" class="social-btn" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
 </div>
 
 <section id="info" class="main-section active">
@@ -355,7 +370,7 @@ to{opacity:1}
 <h3>Nuestra ubicación</h3>
 <div class="location-card">
 <strong>📍 Pereira</strong>
-<iframe  src="https://www.google.com/maps?q=4.8148426,-75.6955205&output=embed" loading=lazy></iframe>
+<iframe src="https://www.google.com/maps?q=4.8148426,-75.6955205&output=embed" loading="lazy"></iframe>
 </div>
 </div>
 </section>
@@ -376,9 +391,11 @@ to{opacity:1}
 <div class="bottom-nav">
 <button class="nav-btn active" onclick="showSection('info',this)">
 <i class="fa-solid fa-house"></i>
+<span>Inicio</span>
 </button>
 <button class="nav-btn" onclick="showSection('catalogo',this)">
 <i class="fa-solid fa-store"></i>
+<span>Catálogo</span>
 </button>
 </div>
 
@@ -397,6 +414,7 @@ to{opacity:1}
 const WHATSAPP="573218172438";
 let data={};
 let currentCategory=null;
+let productIndex=[];
 
 function showSection(id,btn){
 document.querySelectorAll(".main-section").forEach(s=>s.classList.remove("active"));
@@ -405,6 +423,10 @@ document.getElementById(id).classList.add("active");
 btn.classList.add("active");
 window.scrollTo({top:0,behavior:"smooth"});
 }
+
+productModal.onclick=e=>{
+if(e.target===productModal)closeProduct();
+};
 
 fetch("https://script.google.com/macros/s/AKfycbx4nd_AUrout4BxfW-hX6V9_BG5iylbspGFbfz_wFvymzDiGSEN5JoLE9-YzLm04h2l/exec")
 .then(r=>r.json())
@@ -467,6 +489,8 @@ renderItems(items);
 
 function renderItems(items){
 menuContent.innerHTML="";
+productIndex=items;
+
 if(!items.length){
 menuContent.innerHTML="<p style='text-align:center;color:#aaa'>Sin resultados</p>";
 return;
@@ -474,25 +498,23 @@ return;
 
 const frag=document.createDocumentFragment();
 
-items.forEach(p=>{
+items.forEach((p,i)=>{
 const div=document.createElement("div");
-div.innerHTML=productCard(p);
+div.innerHTML=`
+<div class="menu-item" data-id="${i}">
+<img src="./${p.imagen||"default.jpg"}">
+<div class="product-title">${p.nombre}</div>
+<div class="price">$ ${Number(p.precio).toLocaleString()}</div>
+</div>`;
+div.firstElementChild.onclick=()=>openProduct(i);
 frag.appendChild(div.firstElementChild);
 });
 
 menuContent.appendChild(frag);
 }
 
-function productCard(p){
-return `
-<div class="menu-item" onclick='openProduct(${JSON.stringify(p)})'>
-<img src="./${p.imagen||"default.jpg"}">
-<div class="product-title">${p.nombre}</div>
-<div class="price">$ ${Number(p.precio).toLocaleString()}</div>
-</div>`;
-}
-
-function openProduct(p){
+function openProduct(id){
+const p=productIndex[id];
 modalImg.src="./"+(p.imagen||"default.jpg");
 modalTitle.textContent=p.nombre;
 modalPrice.textContent="$ "+Number(p.precio).toLocaleString();
@@ -507,11 +529,20 @@ productModal.classList.remove("active");
 document.body.style.overflow="auto";
 }
 
-searchInput.addEventListener("input",applyFilters);
-minPrice.addEventListener("input",applyFilters);
-maxPrice.addEventListener("input",applyFilters);
+function debounce(fn,delay=200){
+let t;
+return(...args)=>{
+clearTimeout(t);
+t=setTimeout(()=>fn(...args),delay);
+};
+}
+
+const debouncedFilter=debounce(applyFilters);
+
+searchInput.addEventListener("input",debouncedFilter);
+minPrice.addEventListener("input",debouncedFilter);
+maxPrice.addEventListener("input",debouncedFilter);
 </script>
 
 </body>
 </html>
-
