@@ -1,623 +1,692 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Carlitos le vende | Tecnología real</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Carlitos le vende | Tecnología real</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<style>
-:root{
---bg:#0a0f1e;
---card:rgba(28,38,75,.88);
---primary:#1e88ff;
---accent:#ffd400;
---text:#f5f7fb;
---muted:#aab0c0;
---glass:rgba(255,255,255,.08);
-}
+    <style>
+        :root {
+            --bg: #0a0f1e;
+            --card: rgba(28, 38, 75, .88);
+            --primary: #1e88ff;
+            --accent: #ffd400;
+            --text: #f5f7fb;
+            --muted: #aab0c0;
+            --glass: rgba(255, 255, 255, .08);
+        }
 
-*{margin:0;padding:0;box-sizing:border-box}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
 
-body{
-font-family:'Nunito',sans-serif;
-background:#000;
-color:var(--text);
-overflow-x:hidden;
-}
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #000;
+            color: var(--text);
+            overflow-x: hidden;
+        }
 
-.video-bg{
-position:fixed;
-inset:0;
-z-index:-10;
-overflow:hidden;
-}
+        .video-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            overflow: hidden;
+        }
 
-.video-bg video{
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:.35;
-}
+        .video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .35;
+        }
 
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:linear-gradient(
-to bottom,
-rgba(10,15,35,.65),
-rgba(10,15,35,.95)
-);
-z-index:-5;
-pointer-events:none;
-}
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(10, 15, 35, .65),
+                    rgba(10, 15, 35, .95));
+            z-index: -5;
+            pointer-events: none;
+        }
 
-@media (prefers-reduced-motion: reduce){
-.video-bg{display:none}
-body{background:#0a0f1e}
-}
+        @media (prefers-reduced-motion: reduce) {
+            .video-bg {
+                display: none
+            }
 
-.wrapper{
-max-width:420px;
-margin:0 auto;
-padding:20px 16px 90px;
-position:relative;
-}
+            body {
+                background: #0a0f1e
+            }
+        }
 
-.wrapper::before{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(
-to bottom,
-rgba(10,15,35,.55),
-rgba(10,15,35,.95)
-);
-border-radius:26px;
-z-index:-1;
-}
+        .wrapper {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px 16px 90px;
+            position: relative;
+        }
 
-.hero{
-text-align:center;
-margin-bottom:10px;
-}
+        .wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(10, 15, 35, .55),
+                    rgba(10, 15, 35, .95));
+            border-radius: 26px;
+            z-index: -1;
+        }
 
-.hero-logo{
-width:120px;
-height:120px;
-margin:0 auto 10px;
-border-radius:50%;
-background:url("./logo.png") center/cover no-repeat;
-border:3px solid var(--accent);
-}
+        .hero {
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-.hero-title{
-font-family:'Playfair Display',serif;
-font-size:1.6rem;
-}
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: url("./logo.png") center/cover no-repeat;
+            border: 3px solid var(--accent);
+        }
 
-.hero-tagline{
-color:var(--muted);
-margin-top:6px;
-line-height:1.4;
-}
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+        }
 
-.socials{
-display:flex;
-justify-content:center;
-gap:18px;
-margin:10px 0 14px;
-}
+        .hero-tagline {
+            color: var(--muted);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
 
-.social-btn{
-width:48px;
-height:48px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:var(--card);
-color:#fff;
-font-size:1.25rem;
-text-decoration:none;
-border:1px solid var(--glass);
-transition:.2s ease;
-}
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 10px 0 14px;
+        }
 
-.social-btn:hover{
-transform:translateY(-3px) scale(1.07);
-background:rgba(30,136,255,.25);
-}
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--card);
+            color: #fff;
+            font-size: 1.25rem;
+            text-decoration: none;
+            border: 1px solid var(--glass);
+            transition: .2s ease;
+        }
 
-.main-section{
-  display:none;
-  opacity:0;
-  transform:translateY(15px);
-  pointer-events:none;
-  transition:.35s ease;
-}
+        .social-btn:hover {
+            transform: translateY(-3px) scale(1.07);
+            background: rgba(30, 136, 255, .25);
+        }
 
-.main-section.active{
-  display:block;
-  opacity:1;
-  transform:none;
-  pointer-events:auto;
-}
+        .main-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            pointer-events: none;
+            transition: .35s ease;
+        }
+
+        .main-section.active {
+            display: block;
+            opacity: 1;
+            transform: none;
+            pointer-events: auto;
+        }
 
 
-.locations{margin-top:20px}
+        .locations {
+            margin-top: 20px
+        }
 
-.locations h3{
-font-family:'Playfair Display',serif;
-text-align:center;
-margin-bottom:12px;
-}
+        .locations h3 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 12px;
+        }
 
-.location-card{
-background:var(--card);
-border-radius:16px;
-padding:12px;
-margin-bottom:14px;
-border:1px solid var(--glass);
-}
+        .location-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid var(--glass);
+        }
 
-.location-card iframe{
-width:100%;
-height:200px;
-border:none;
-border-radius:12px;
-}
+        .location-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 12px;
+        }
 
-input{
-width:100%;
-padding:12px;
-border-radius:12px;
-border:none;
-background:#0e1730;
-color:#fff;
-margin-bottom:10px;
-}
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: #0e1730;
+            color: #fff;
+            margin-bottom: 10px;
+        }
 
-.price-filters{
-display:flex;
-gap:10px;
-}
+        .price-filters {
+            display: flex;
+            gap: 10px;
+        }
 
-.menu-nav{
-display:flex;
-gap:8px;
-overflow-x:auto;
-margin:12px 0;
-}
+        .menu-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
 
-.menu-nav button{
-background:var(--glass);
-border:none;
-color:#fff;
-padding:8px 14px;
-border-radius:999px;
-font-weight:700;
-cursor:pointer;
-transition:.2s ease;
-}
+        .menu-nav button {
+            background: var(--glass);
+            border: none;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s ease;
+        }
 
-.menu-nav button.active{
-background:var(--primary);
-}
+        .menu-nav button.active {
+            background: var(--primary);
+        }
 
-.menu-item{
-background:var(--card);
-border-radius:20px;
-padding:16px;
-margin-bottom:20px;
-border:1px solid var(--glass);
-cursor:pointer;
-transition:.2s ease;
-}
+        .menu-item {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid var(--glass);
+            cursor: pointer;
+            transition: .2s ease;
+        }
 
-.menu-item:hover{
-transform:translateY(-4px);
-box-shadow:0 12px 25px rgba(0,0,0,.35);
-}
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, .35);
+        }
 
-.menu-item img{
-width:100%;
-aspect-ratio:4/5;
-object-fit:cover;
-border-radius:16px;
-background:#0b1220;
-margin-bottom:12px;
-}
+        .menu-item img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #0b1220;
+            margin-bottom: 12px;
+        }
 
-.product-title{
-font-family:'Playfair Display',serif;
-font-size:1.1rem;
-}
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
 
-.price{
-color:var(--accent);
-font-weight:800;
-font-size:1.2rem;
-margin-top:6px;
-}
+        .price {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-top: 6px;
+        }
 
-.product-modal{
-position:fixed;
-inset:0;
-background:rgba(5,8,20,.92);
-backdrop-filter:blur(10px);
-z-index:5000;
-display:flex;
-flex-direction:column;
-padding:20px;
-opacity:0;
-pointer-events:none;
-transition:.3s ease;
-}
+        .product-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 20, .92);
+            backdrop-filter: blur(10px);
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s ease;
+        }
 
-.product-modal.active{
-opacity:1;
-pointer-events:auto;
-}
+        .product-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-.modal-close{
-align-self:flex-end;
-font-size:1.8rem;
-cursor:pointer;
-}
+        .modal-close {
+            align-self: flex-end;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
 
-.modal-img{
-width:100%;
-aspect-ratio:1/1;
-object-fit:cover;
-border-radius:20px;
-background:#0b1220;
-}
+        .modal-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 20px;
+            background: #0b1220;
+        }
 
-.modal-content{
-margin-top:16px;
-}
+        .modal-content {
+            margin-top: 16px;
+        }
 
-.modal-title{
-font-family:'Playfair Display',serif;
-font-size:1.6rem;
-}
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+        }
 
-.modal-price{
-color:var(--accent);
-font-size:1.4rem;
-font-weight:800;
-margin:8px 0;
-}
+        .modal-price {
+            color: var(--accent);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 8px 0;
+        }
 
-.modal-desc{
-color:var(--muted);
-line-height:1.6;
-margin-bottom:18px;
-}
+        .modal-desc {
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
 
-.buy-btn{
-display:block;
-background:var(--primary);
-padding:14px;
-border-radius:14px;
-text-align:center;
-color:#fff;
-text-decoration:none;
-font-weight:800;
-transition:.2s ease;
-}
+        .buy-btn {
+            display: block;
+            background: var(--primary);
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            transition: .2s ease;
+        }
 
-.buy-btn:hover{
-transform:scale(1.03);
-}
+        .buy-btn:hover {
+            transform: scale(1.03);
+        }
 
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:64px;
-background:rgba(10,15,35,.95);
-backdrop-filter:blur(10px);
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:1000;
-border-top:1px solid var(--glass);
-}
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(10, 15, 35, .95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            border-top: 1px solid var(--glass);
+        }
 
-.nav-btn{
-color:var(--muted);
-background:none;
-border:none;
-font-size:1.2rem;
-display:flex;
-flex-direction:column;
-align-items:center;
-cursor:pointer;
-transition:.2s;
-}
+        .nav-btn {
+            color: var(--muted);
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: .2s;
+        }
 
-.nav-btn span{
-font-size:.65rem;
-margin-top:2px;
-}
+        .nav-btn span {
+            font-size: .65rem;
+            margin-top: 2px;
+        }
 
-.nav-btn.active{
-color:var(--primary);
-}
+        .nav-btn.active {
+            color: var(--primary);
+        }
 
-footer{
-text-align:center;
-color:var(--muted);
-font-size:.8rem;
-margin-top:20px;
-}
-</style>
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: .8rem;
+            margin-top: 20px;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="video-bg">
-  <video 
-    autoplay 
-    muted 
-    loop 
-    playsinline 
-    preload="metadata"
-    poster="poster.jpg"
-    disablepictureinpicture>
-    <source src="videofondo.mp4" type="video/mp4">
-  </video>
-</div>
+    <div class="video-bg">
+        <video autoplay muted loop playsinline preload="metadata" poster="poster.jpg" disablepictureinpicture>
+            <source src="videofondo.mp4" type="video/mp4">
+        </video>
+    </div>
 
-<main class="wrapper">
+    <main class="wrapper">
 
-  <div class="hero">
-    <div class="hero-logo" role="img" aria-label="Logo Carlitos le vende"></div>
-    <h1 class="hero-title">Carlitos le vende</h1>
-    <p class="hero-tagline">Tecnología real, sin cuentos raros</p>
-  </div>
+        <div class="hero">
+            <div class="hero-logo" role="img" aria-label="Logo Carlitos le vende"></div>
+            <h1 class="hero-title">Carlitos le vende</h1>
+            <p class="hero-tagline">Tecnología real, sin cuentos raros</p>
+        </div>
 
-  <div class="socials">
-    <a href="https://wa.me/573218172438" 
-       class="social-btn" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       aria-label="WhatsApp">
-       <i class="fa-brands fa-whatsapp"></i>
-    </a>
+        <div class="socials">
+            <a href="https://wa.me/573218172438" class="social-btn" target="_blank" rel="noopener noreferrer"
+                aria-label="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
 
-    <a href="https://www.instagram.com/carlitoslevende/" 
-       class="social-btn" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       aria-label="Instagram">
-       <i class="fa-brands fa-instagram"></i>
-    </a>
+            <a href="https://www.instagram.com/carlitoslevende/" class="social-btn" target="_blank"
+                rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
 
-    <a href="https://www.facebook.com/profile.php?id=100045449417873" 
-       class="social-btn" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       aria-label="Facebook">
-       <i class="fa-brands fa-facebook-f"></i>
-    </a>
+            <a href="https://www.facebook.com/profile.php?id=100045449417873" class="social-btn" target="_blank"
+                rel="noopener noreferrer" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
 
-    <a href="https://www.tiktok.com/@carlitoslevende_" 
-       class="social-btn" 
-       target="_blank" 
-       rel="noopener noreferrer"
-       aria-label="TikTok">
-       <i class="fa-brands fa-tiktok"></i>
-    </a>
-  </div>
+            <a href="https://www.tiktok.com/@carlitoslevende_" class="social-btn" target="_blank"
+                rel="noopener noreferrer" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+        </div>
 
-  <section id="info" class="main-section active">
-    <div class="locations">
-      <h3>Nuestra ubicación</h3>
-      <div class="location-card">
-        <strong>📍 Pereira</strong>
-        <iframe 
-          src="https://www.google.com/maps?q=4.8148426,-75.6955205&output=embed" 
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+        <section id="info" class="main-section active">
+            <div class="locations">
+                <h3>Nuestra ubicación</h3>
+                <div class="location-card">
+                    <strong>📍 Pereira</strong>
+                    <iframe src="https://www.google.com/maps?q=4.8148426,-75.6955205&output=embed" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogo" class="main-section">
+
+            <input id="searchInput" placeholder="Buscar producto" autocomplete="off">
+
+            <div class="price-filters">
+                <input type="number" id="minPrice" placeholder="Precio mín" inputmode="numeric">
+
+                <input type="number" id="maxPrice" placeholder="Precio máx" inputmode="numeric">
+            </div>
+
+            <div class="menu-nav" id="menuNav"></div>
+
+            <div id="menuContent">
+                <p style="text-align:center;color:#aaa">Cargando productos...</p>
+            </div>
+
+        </section>
+
+        <footer>Carlitos le vende ©</footer>
+
+    </main>
+
+    <div class="bottom-nav">
+        <button class="nav-btn active" onclick="showSection('info',this)">
+            <i class="fa-solid fa-house"></i>
+            <span>Inicio</span>
+        </button>
+
+        <button class="nav-btn" onclick="showSection('catalogo',this)">
+            <i class="fa-solid fa-store"></i>
+            <span>Catálogo</span>
+        </button>
+    </div>
+
+    <div class="product-modal" id="productModal">
+        <div class="modal-close" id="modalClose">✕</div>
+
+        <img id="modalImg" class="modal-img" alt="Imagen del producto">
+
+        <div class="modal-content">
+            <div id="modalTitle" class="modal-title"></div>
+            <div id="modalPrice" class="modal-price"></div>
+            <div id="modalDesc" class="modal-desc"></div>
+
+            <a id="modalBuy" class="buy-btn" target="_blank" rel="noopener noreferrer">
+                Comprar ahora
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        const WHATSAPP = "573218172438";
+
+        let data = {};
+        let allProducts = [];
+        let currentCategory = null;
+        let productIndex = [];
+
+        const menuContent = document.getElementById("menuContent");
+        const menuNav = document.getElementById("menuNav");
+        const searchInput = document.getElementById("searchInput");
+        const minPrice = document.getElementById("minPrice");
+        const maxPrice = document.getElementById("maxPrice");
+        const productModal = document.getElementById("productModal");
+        const modalImg = document.getElementById("modalImg");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalPrice = document.getElementById("modalPrice");
+        const modalDesc = document.getElementById("modalDesc");
+        const modalBuy = document.getElementById("modalBuy");
+
+
+
+        function showSection(id, btn) {
+            document.querySelectorAll(".main-section").forEach(s => s.classList.remove("active"));
+            document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+
+            document.getElementById(id)?.classList.add("active");
+            btn?.classList.add("active");
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+
+
+        async function loadProducts() {
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbx4nd_AUrout4BxfW-hX6V9_BG5iylbspGFbfz_wFvymzDiGSEN5JoLE9-YzLm04h2l/exec");
+                const json = await response.json();
+
+                Object.keys(json).forEach(cat => {
+                    data[cat] = (json[cat] || [])
+                        .filter(p => p?.activo === true || p?.activo === "TRUE")
+                        .map(p => ({
+                            ...p,
+                            precio: Number(p.precio) || 0,
+                            nombre: p.nombre || "Producto sin nombre",
+                            descripcion: p.descripcion || "",
+                            imagen: p.imagen || "default.jpg"
+                        }));
+                });
+
+                allProducts = Object.values(data).flat();
+                renderNav();
+
+            } catch (err) {
+                menuContent.innerHTML = "<p style='text-align:center;color:#f66'>Error cargando productos</p>";
+            }
+        }
+
+        loadProducts();
+
+
+
+        function renderNav() {
+            const categories = Object.keys(data);
+            if (!categories.length) return;
+
+            currentCategory = categories[0];
+
+            menuNav.innerHTML = categories.map((cat, i) =>
+                `<button class="${i === 0 ? "active" : ""}" data-cat="${cat}">${cat}</button>`
+            ).join("");
+
+            menuNav.onclick = e => {
+                if (e.target.tagName !== "BUTTON") return;
+
+                document.querySelectorAll(".menu-nav button")
+                    .forEach(btn => btn.classList.remove("active"));
+
+                e.target.classList.add("active");
+                currentCategory = e.target.dataset.cat;
+
+                searchInput.value = "";
+                applyFilters();
+            };
+
+            applyFilters();
+        }
+
+
+
+        function applyFilters() {
+            const q = searchInput.value.toLowerCase().trim();
+            const min = +minPrice.value || 0;
+            const max = +maxPrice.value || Infinity;
+
+            const source = q ? allProducts : (data[currentCategory] || []);
+
+            const filtered = source.filter(p =>
+                p.precio >= min &&
+                p.precio <= max &&
+                (
+                    p.nombre.toLowerCase().includes(q) ||
+                    (p.descripcion || "").toLowerCase().includes(q)
+                )
+            );
+
+            if (!filtered.length && q) {
+                showAlternativeProducts(q);
+            } else {
+                renderItems(filtered);
+            }
+        }
+
+        function showAlternativeProducts(query) {
+            const words = query.split(" ").filter(w => w.length > 2);
+
+            const suggestions = allProducts.filter(p => {
+                const text = (p.nombre + " " + (p.descripcion || "")).toLowerCase();
+                return words.some(w => text.includes(w));
+            }).slice(0, 6);
+
+            if (suggestions.length) {
+                menuContent.innerHTML = `
+      <div style="text-align:center;margin-bottom:25px">
+        <h3 style="color:#ff9800;">
+          Ese producto no está disponible
+        </h3>
+        <p style="color:#aaa;">
+          Pero estos podrían interesarte 👇
+        </p>
       </div>
+    `;
+
+                renderItems(suggestions);
+            } else {
+                menuContent.innerHTML = `
+      <div style="text-align:center;padding:40px">
+        <h3 style="color:#ff9800;">
+          Ese producto no está disponible
+        </h3>
+        <p style="color:#aaa;">
+          Podemos conseguirlo para ti.
+        </p>
+        <a 
+          href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+                    "Hola, estoy buscando: " + query
+                )}" 
+          target="_blank"
+          class="ask-btn"
+        >
+          Solicitar por WhatsApp
+        </a>
+      </div>
+    `;
+            }
+        }
+
+        function showSmartSuggestions(query) {
+            const words = query.split(" ").filter(w => w.length > 2);
+
+            const scored = allProducts.map(p => {
+                const text = (p.nombre + " " + (p.descripcion || "")).toLowerCase();
+                let score = 0;
+
+                words.forEach(w => {
+                    if (text.includes(w)) score++;
+                });
+
+                return { product: p, score };
+            })
+                .filter(item => item.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 6)
+                .map(item => item.product);
+
+            if (scored.length) {
+
+                productIndex = scored;
+
+                menuContent.innerHTML = `
+    <div style="text-align:center;margin-bottom:25px">
+      <h3 style="color:#ff9800;">
+        Ese producto no está disponible
+      </h3>
+      <p style="color:#aaa;">
+        Pero estos podrían interesarte 👇
+      </p>
     </div>
-  </section>
 
-  <section id="catalogo" class="main-section">
-
-    <input 
-      id="searchInput" 
-      placeholder="Buscar producto" 
-      autocomplete="off">
-
-    <div class="price-filters">
-      <input 
-        type="number" 
-        id="minPrice" 
-        placeholder="Precio mín" 
-        inputmode="numeric">
-
-      <input 
-        type="number" 
-        id="maxPrice" 
-        placeholder="Precio máx" 
-        inputmode="numeric">
-    </div>
-
-    <div class="menu-nav" id="menuNav"></div>
-
-    <div id="menuContent">
-      <p style="text-align:center;color:#aaa">Cargando productos...</p>
-    </div>
-
-  </section>
-
-  <footer>Carlitos le vende ©</footer>
-
-</main>
-
-<div class="bottom-nav">
-  <button class="nav-btn active" onclick="showSection('info',this)">
-    <i class="fa-solid fa-house"></i>
-    <span>Inicio</span>
-  </button>
-
-  <button class="nav-btn" onclick="showSection('catalogo',this)">
-    <i class="fa-solid fa-store"></i>
-    <span>Catálogo</span>
-  </button>
-</div>
-
-<div class="product-modal" id="productModal">
-  <div class="modal-close" id="modalClose">✕</div>
-
-  <img id="modalImg" class="modal-img" alt="Imagen del producto">
-
-  <div class="modal-content">
-    <div id="modalTitle" class="modal-title"></div>
-    <div id="modalPrice" class="modal-price"></div>
-    <div id="modalDesc" class="modal-desc"></div>
-
-    <a id="modalBuy" 
-       class="buy-btn" 
-       target="_blank" 
-       rel="noopener noreferrer">
-       Comprar ahora
-    </a>
-  </div>
-</div>
+    ${scored.map((p, i) => `
+      <div class="menu-item" data-id="${i}">
+        <img 
+          src="./${p.imagen || "default.jpg"}"
+          loading="lazy"
+          decoding="async"
+          onerror="this.src='./default.jpg'">
+        <div class="product-title">${p.nombre}</div>
+        <div class="price">$ ${Number(p.precio).toLocaleString()}</div>
+      </div>
+    `).join("")}
+  `;
+            }
+        }
 
 
-<script>
-const WHATSAPP = "573218172438";
+        function renderItems(items) {
+            productIndex = items;
 
-let data = {};
-let allProducts = [];
-let currentCategory = null;
-let productIndex = [];
+            if (!items.length) {
+                menuContent.innerHTML = "<p style='text-align:center;color:#aaa'>Sin resultados</p>";
+                return;
+            }
 
-const menuContent = document.getElementById("menuContent");
-const menuNav = document.getElementById("menuNav");
-const searchInput = document.getElementById("searchInput");
-const minPrice = document.getElementById("minPrice");
-const maxPrice = document.getElementById("maxPrice");
-const productModal = document.getElementById("productModal");
-const modalImg = document.getElementById("modalImg");
-const modalTitle = document.getElementById("modalTitle");
-const modalPrice = document.getElementById("modalPrice");
-const modalDesc = document.getElementById("modalDesc");
-const modalBuy = document.getElementById("modalBuy");
-
-
-
-function showSection(id, btn) {
-document.querySelectorAll(".main-section").forEach(s => s.classList.remove("active"));
-document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-
-document.getElementById(id)?.classList.add("active");
-btn?.classList.add("active");
-
-window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-
-
-async function loadProducts() {
-try {
-const response = await fetch("https://script.google.com/macros/s/AKfycbx4nd_AUrout4BxfW-hX6V9_BG5iylbspGFbfz_wFvymzDiGSEN5JoLE9-YzLm04h2l/exec");
-const json = await response.json();
-
-Object.keys(json).forEach(cat => {
-data[cat] = (json[cat] || [])
-.filter(p => p?.activo === true || p?.activo === "TRUE")
-.map(p => ({
-...p,
-precio: Number(p.precio) || 0,
-nombre: p.nombre || "Producto sin nombre",
-descripcion: p.descripcion || "",
-imagen: p.imagen || "default.jpg"
-}));
-});
-
-allProducts = Object.values(data).flat();
-renderNav();
-
-} catch (err) {
-menuContent.innerHTML = "<p style='text-align:center;color:#f66'>Error cargando productos</p>";
-}
-}
-
-loadProducts();
-
-
-
-function renderNav() {
-const categories = Object.keys(data);
-if (!categories.length) return;
-
-currentCategory = categories[0];
-
-menuNav.innerHTML = categories.map((cat, i) =>
-`<button class="${i === 0 ? "active" : ""}" data-cat="${cat}">${cat}</button>`
-).join("");
-
-menuNav.onclick = e => {
-if (e.target.tagName !== "BUTTON") return;
-
-document.querySelectorAll(".menu-nav button")
-.forEach(btn => btn.classList.remove("active"));
-
-e.target.classList.add("active");
-currentCategory = e.target.dataset.cat;
-
-searchInput.value = "";
-applyFilters();
-};
-
-applyFilters();
-}
-
-
-
-function applyFilters() {
-const q = searchInput.value.trim().toLowerCase();
-const min = Number(minPrice.value) || 0;
-const max = Number(maxPrice.value) || Infinity;
-
-const source = q ? allProducts : (data[currentCategory] || []);
-
-const filtered = source.filter(p =>
-p.precio >= min &&
-p.precio <= max &&
-(
-p.nombre.toLowerCase().includes(q) ||
-p.descripcion.toLowerCase().includes(q)
-)
-);
-
-renderItems(filtered);
-}
-
-
-
-function renderItems(items) {
-productIndex = items;
-
-if (!items.length) {
-menuContent.innerHTML = "<p style='text-align:center;color:#aaa'>Sin resultados</p>";
-return;
-}
-
-menuContent.innerHTML = items.map((p, i) => `
+            menuContent.innerHTML = items.map((p, i) => `
 <div class="menu-item" data-id="${i}">
 <img 
 src="./${p.imagen}" 
@@ -628,60 +697,61 @@ onerror="this.src='./default.jpg'">
 <div class="price">$ ${p.precio.toLocaleString()}</div>
 </div>
 `).join("");
-}
+        }
 
-menuContent.onclick = e => {
-const item = e.target.closest(".menu-item");
-if (!item) return;
-openProduct(Number(item.dataset.id));
-};
-
-
-
-function openProduct(id) {
-const p = productIndex[id];
-if (!p) return;
-
-modalImg.src = "./" + p.imagen;
-modalTitle.textContent = p.nombre;
-modalPrice.textContent = "$ " + p.precio.toLocaleString();
-modalDesc.textContent = p.descripcion;
-
-modalBuy.href =
-`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-`Hola, me interesa ${p.nombre} por $${p.precio}`
-)}`;
-
-productModal.classList.add("active");
-document.body.style.overflow = "hidden";
-}
-
-function closeProduct() {
-productModal.classList.remove("active");
-document.body.style.overflow = "";
-}
-
-productModal.onclick = e => {
-if (e.target === productModal) closeProduct();
-};
+        menuContent.onclick = e => {
+            const item = e.target.closest(".menu-item");
+            if (!item) return;
+            openProduct(Number(item.dataset.id));
+        };
 
 
 
-function debounce(fn, delay = 250) {
-let t;
-return (...args) => {
-clearTimeout(t);
-t = setTimeout(() => fn(...args), delay);
-};
-}
+        function openProduct(id) {
+            const p = productIndex[id];
+            if (!p) return;
 
-const debouncedFilter = debounce(applyFilters);
+            modalImg.src = "./" + p.imagen;
+            modalTitle.textContent = p.nombre;
+            modalPrice.textContent = "$ " + p.precio.toLocaleString();
+            modalDesc.textContent = p.descripcion;
 
-searchInput.oninput = debouncedFilter;
-minPrice.oninput = debouncedFilter;
-maxPrice.oninput = debouncedFilter;
+            modalBuy.href =
+                `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+                    `Hola, me interesa ${p.nombre} por $${p.precio}`
+                )}`;
 
-</script>
+            productModal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeProduct() {
+            productModal.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        productModal.onclick = e => {
+            if (e.target === productModal) closeProduct();
+        };
+
+
+
+        function debounce(fn, delay = 250) {
+            let t;
+            return (...args) => {
+                clearTimeout(t);
+                t = setTimeout(() => fn(...args), delay);
+            };
+        }
+
+        const debouncedFilter = debounce(applyFilters);
+
+        searchInput.oninput = debouncedFilter;
+        minPrice.oninput = debouncedFilter;
+        maxPrice.oninput = debouncedFilter;
+
+    </script>
 
 </body>
+
 </html>
